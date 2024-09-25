@@ -1,0 +1,106 @@
+/* Estilos Gerais */
+.container {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.loginBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    135deg,
+    #064fb4,
+    #0f3274
+  ); /* Gradiente azul do tema */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra para efeito moderno */
+  width: 100%;
+  max-width: 400px;
+  color: white;
+  text-align: center;
+}
+
+.welcome h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #39c2e4; /* Azul claro para destacar o título */
+}
+
+.welcome h2 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+}
+
+.welcome p {
+  margin-bottom: 20px;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  text-align: left;
+  margin-bottom: 8px;
+  font-size: 1rem;
+  color: #ffffff; /* Cinza claro para o label */
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  background-color: #ffffff;
+  color: #000000; /* Azul escuro para contraste no input */
+  font-size: 1rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Efeito de foco no input */
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  background-color: #39c2e4; /* Botão azul claro */
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.loginButton:hover {
+  background-color: #383774; /* Muda para o azul mais escuro no hover */
+  transform: scale(1.05); /* Efeito de zoom suave */
+}
+
+.loginButton:disabled {
+  background-color: #383774;
+}
+
+@media (max-width: 768px) {
+  .loginBox {
+    width: 90%;
+  }
+}

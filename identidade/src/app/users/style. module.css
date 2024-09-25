@@ -1,0 +1,21 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  margin-bottom: 20px;
+  color: #041f69;
+}
+
+.userList {
+  list-style-type: none;
+  padding: 0;
+}
+
+.userItem {
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+}
