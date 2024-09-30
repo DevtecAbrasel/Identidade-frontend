@@ -22,11 +22,12 @@ jobs:
       with:
         node-version: 20.9.0
         cache: 'npm'
-        cache-dependency-path: package-lock.json
+        cache-dependency-path: identidade/package-lock.json
 
     - name: Install node packages
       run: |
           echo Installing node packages...
+          cd identidade
           npm install
           if [ $? -eq 0 ]; then echo "Install sucessful!";
           else echo "Install failed!"; fi
@@ -35,12 +36,14 @@ jobs:
       env: 
         dotenv: .env.local
       run: |
+          cd identidade
           touch $dotenv
           echo NEXTAUTH_SECRET=${{ secrets.PROD_NEXTAUTH_SECRET }} > $dotenv
           echo NEXTAUTH_URL=${{ secrets.PROD_NEXTAUTH_URL }} >> $dotenv
 
     - name: Build app
       run: |
+        cd identidade 
         npm run build
 
     - name: Deploy to EC2
@@ -48,7 +51,7 @@ jobs:
       with:
         ARGS: "-rlgoDzc -i --delete"
         SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
-        SOURCE: "."
+        SOURCE: "./identidade/"
         REMOTE_HOST: ${{ vars.PROD_REMOTE_HOST }}
         REMOTE_USER: identidade
         TARGET: "~/frontend"
