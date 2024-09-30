@@ -1,0 +1,60 @@
+name: Deploy
+
+on:
+  #pull_request:
+    #branches: [ "develop" ]
+    #types: ["closed"]
+
+  workflow_dispatch:
+    
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    #if: ${{ !github.event.pull_request || github.event.pull_request.merged == true }}
+
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ vars.PROD_BRANCH }}
+    
+    - name: Use Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.9.0
+        cache: 'npm'
+        cache-dependency-path: package-lock.json
+
+    - name: Install node packages
+      run: |
+          echo Installing node packages...
+          npm install
+          if [ $? -eq 0 ]; then echo "Install sucessful!";
+          else echo "Install failed!"; fi
+
+    - name: Create .env file
+      env: 
+        dotenv: .env.local
+      run: |
+          touch $dotenv
+          echo NEXTAUTH_SECRET=${{ secrets.PROD_NEXTAUTH_SECRET }} > $dotenv
+          echo NEXTAUTH_URL=${{ secrets.PROD_NEXTAUTH_URL }} >> $dotenv
+
+    - name: Build app
+      run: |
+        npm run build
+
+    - name: Deploy to EC2
+      uses: easingthemes/ssh-deploy@main
+      with:
+        ARGS: "-rlgoDzc -i --delete"
+        SSH_PRIVATE_KEY: ${{ secrets.PROD_SSH_PRIVATE_KEY }}
+        SOURCE: "."
+        REMOTE_HOST: ${{ vars.PROD_REMOTE_HOST }}
+        REMOTE_USER: identidade
+        TARGET: "~/frontend"
+        EXCLUDE: "/.git/, /.github/, /.gitignore/, /.env.example/, /node_modules/"
+        SCRIPT_AFTER: |
+          cd ~/frontend
+          npm install
+          pm2 restart up-next
+      
