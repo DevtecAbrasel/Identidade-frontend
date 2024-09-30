@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import styles from "./createUser.module.css";
+import styles from "./createuser.module.css";
 import Layout from "../components/navBar";
 
 export default function CreateUser() {
