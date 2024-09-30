@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import styles from "./CreateUser.module.css";
+import Layout from "../components/navBar";
 
 export default function CreateUser() {
   const { data: session } = useSession(); // Obtemos o token da sessão do NextAuth
@@ -53,69 +54,81 @@ export default function CreateUser() {
   };
 
   return (
-    <div className={styles.container}>
-      <h1>Criar Usuário</h1>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <div className={styles.inputGroup}>
-          <label htmlFor="name">Nome</label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
-        </div>
+    <Layout>
+    <div className={styles.dashboard}>
+      ...
+        <h1>Criar Novo Usuário</h1>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
+      <div className={styles.formContainer}>
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="name">Nome</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="password">Senha</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="origem">Origem</label>
-          <input
-            type="text"
-            id="origem"
-            value={origem}
-            onChange={(e) => setOrigem(e.target.value)}
-            required
-          />
-        </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Senha</label>
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
 
-        <div className={styles.inputGroup}>
-          <label htmlFor="isAdmin">Administrador?</label>
-          <input
-            type="checkbox"
-            id="isAdmin"
-            checked={isAdmin}
-            onChange={(e) => setIsAdmin(e.target.checked)}
-          />
-        </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="origem">Origem</label>
+            <input
+              type="text"
+              id="origem"
+              value={origem}
+              onChange={(e) => setOrigem(e.target.value)}
+              required
+              className={styles.input}
+            />
+          </div>
 
-        <button type="submit" className={styles.submitButton} disabled={loading}>
-          {loading ? "Criando usuário..." : "Criar Usuário"}
-        </button>
+          <div className={styles.checkboxGroup}>
+            <label htmlFor="isAdmin">Administrador?</label>
+            <input
+              type="checkbox"
+              id="isAdmin"
+              checked={isAdmin}
+              onChange={(e) => setIsAdmin(e.target.checked)}
+              className={styles.checkbox}
+            />
+          </div>
 
-        {message && <p className={styles.message}>{message}</p>}
-      </form>
-    </div>
-  );
+          <button type="submit" className={styles.submitButton} disabled={loading}>
+            {loading ? "Criando usuário..." : "Criar Usuário"}
+          </button>
+
+          {message && <p className={styles.message}>{message}</p>}
+        </form>
+      </div>
+      </div>
+
+</Layout>
+);
 }

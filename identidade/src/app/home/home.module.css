@@ -1,9 +1,10 @@
-/* Estilos Gerais */
+/* Layout Geral */
 .dashboard {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #f0f2f5;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 /* Menu Lateral */
@@ -12,20 +13,23 @@
   background-color: #041f69;
   color: white;
   padding: 20px;
-  transition: transform 0.3s ease, width 0.3s ease; /* Transição suave */
+  transition: transform 0.3s ease, width 0.3s ease;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 1000; /* Certifique-se de que o sidebar esteja acima do conteúdo principal */
 }
 
 .sidebar.open {
-  transform: translateX(0); /* Mostra o menu lateral */
+  transform: translateX(0);
 }
 
 .sidebar.closed {
-  width: 0; /* Fecha o menu lateral completamente */
-
-  transform: translateX(-250px); /* Esconde o menu lateral */
+  transform: translateX(-100%);
 }
 
 .profile {
@@ -59,6 +63,7 @@
 
 .logoutContainer {
   text-align: center;
+  margin-top: auto;
 }
 
 .logoutButton {
@@ -75,132 +80,59 @@
   background-color: #064fb4;
 }
 
+/* Botão de Alternar Menu */
+.menuToggle {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  background: #041f69;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1500; /* Garantir que fique acima do sidebar */
+  border-radius: 4px;
+}
+
 /* Painel Principal */
 .main {
   flex: 1;
   padding: 20px;
+  margin-left: 250px;
   transition: margin-left 0.3s ease;
 }
 
-.sidebar.closed ~ .main {
-  margin-left: 0; /* O painel principal preenche a tela quando o menu lateral é fechado */
-}
-
-.header {
+.main .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
 }
 
-.menuToggle {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #333;
+.sidebar.closed ~ .main {
+  margin-left: 0;
 }
 
-.cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.card {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
-.card h3 {
-  color: #041f69; /* Azul escuro do tema para títulos */
-}
-
-.card p {
-  color: #333; /* Texto principal em cor escura */
-}
-
-/* Popup */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popupContent {
-  background-color: white;
-  color: #041f69; /* Cor de texto azul escuro para contraste no popup */
-  padding: 30px;
-  border-radius: 10px;
-  text-align: center;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.popupActions {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
+.content {
   margin-top: 20px;
-}
-
-.confirmButton,
-.cancelButton {
-  padding: 10px 20px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  font-size: 1rem;
-}
-
-.confirmButton {
-  background-color: #39c2e4;
-  color: white;
-}
-
-.confirmButton:disabled {
-  background-color: #9fcde3;
-}
-
-.cancelButton {
-  background-color: #ff4d4d;
-  color: white;
 }
 
 /* Responsividade */
 @media (max-width: 768px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-
   .sidebar {
-    position: absolute;
-    height: 100%;
-    z-index: 10;
+    transform: translateX(-100%);
   }
 
   .sidebar.open {
     transform: translateX(0);
   }
 
-  .sidebar.closed {
-    transform: translateX(-250px);
+  .main {
+    margin-left: 0;
   }
 
-  .main {
-    margin-left: 0; /* Em telas pequenas, o painel sempre ocupa toda a tela */
+  .menuToggle {
+    left: 15px; /* Mantenha o botão sempre visível na tela mobile */
   }
 }

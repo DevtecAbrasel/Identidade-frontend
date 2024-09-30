@@ -87,9 +87,6 @@ const authOptions: NextAuthOptions = {
       return session;
     },
   },
-  session: {
-    strategy: "jwt", // Usar JWT como estratégia de sessão
-  },
   pages: {
     signIn: "/login", // Definimos a página de login
   },

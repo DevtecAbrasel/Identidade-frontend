@@ -1,8 +1,102 @@
-.container {
-  max-width: 500px;
-  margin: 0 auto;
+/* Estilos Gerais */
+.dashboard {
+  display: flex;
+  height: 100vh;
+  background-color: #f0f2f5;
+  transition: all 0.3s ease;
+}
+
+/* Menu Lateral */
+.sidebar {
+  width: 250px;
+  background-color: #041f69;
+  color: white;
   padding: 20px;
-  background-color: #f9f9f9;
+  transition: transform 0.3s ease, width 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sidebar.open {
+  transform: translateX(0); /* Mostra o menu lateral */
+}
+
+.sidebar.closed {
+  transform: translateX(-250px); /* Esconde o menu lateral */
+}
+
+.profile {
+  text-align: center;
+}
+
+.nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.nav ul li {
+  margin: 15px 0;
+}
+
+.nav ul li a {
+  color: #f0f2f5;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+  color: #39c2e4;
+}
+
+.logoutContainer {
+  text-align: center;
+}
+
+.logoutButton {
+  background-color: #39c2e4;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logoutButton:hover {
+  background-color: #064fb4;
+}
+
+/* Painel Principal */
+.main {
+  flex: 1;
+  padding: 20px;
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.closed ~ .main {
+  margin-left: 0; /* O painel principal preenche a tela quando o menu lateral é fechado */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.menuToggle {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}
+
+.formContainer {
+  background-color: #fff;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -16,26 +110,36 @@
 .inputGroup {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 .inputGroup label {
-  margin-bottom: 5px;
   font-weight: bold;
   color: #333;
 }
 
-.inputGroup input[type="text"],
-.inputGroup input[type="email"],
-.inputGroup input[type="password"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+.input {
+  padding: 12px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
   font-size: 16px;
+  transition: border-color 0.3s ease;
 }
 
-.inputGroup input[type="checkbox"] {
-  width: auto;
-  margin-right: 10px;
+.input:focus {
+  border-color: #064fb4;
+  outline: none;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
 }
 
 .submitButton {
@@ -44,18 +148,24 @@
   color: white;
   font-size: 16px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.submitButton:hover {
+.submitButton:disabled {
+  background-color: #9fcde3;
+  cursor: not-allowed;
+}
+
+.submitButton:hover:not(:disabled) {
   background-color: #041f69;
+  transform: translateY(-2px);
 }
 
 .message {
   text-align: center;
-  font-size: 14px;
+  font-size: 1rem;
   color: #041f69;
   margin-top: 20px;
 }
