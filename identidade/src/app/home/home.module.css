@@ -30,7 +30,8 @@
 }
 
 .sidebar.closed {
-  width: 60px; /* Largura contraída */
+  width: 70px;
+  /* Largura contraída */
 }
 
 /* Navegação */
@@ -113,15 +114,15 @@
 .menuToggle {
   position: fixed;
   top: 10px;
-  left: 10px;
+  left: 18px;
   background: linear-gradient(135deg, #064fb4, #0f3274);
   color: white;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   padding: 10px;
   z-index: 1500; /* Garantir que fique acima do sidebar */
-  border-radius: 4px;
+  border-radius: 2px;
 }
 
 .sidebar.closed ~ .menuToggle {
