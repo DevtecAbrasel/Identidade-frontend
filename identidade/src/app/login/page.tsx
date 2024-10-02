@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { signIn } from "next-auth/react";
 import styles from './login.module.css';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 export default function Login() {
   const [loading, setLoading] = useState(false);
@@ -49,7 +51,7 @@ export default function Login() {
           </div>
           <div className={styles.actions}>
             <button type="submit" className={styles.loginButton} disabled={loading}>
-              {loading ? "Carregando..." : "Login"}
+              {loading ? <FontAwesomeIcon icon={(faSpinner)} className={styles.icon}></FontAwesomeIcon> : "Login"}
             </button>
           </div>
         </form>

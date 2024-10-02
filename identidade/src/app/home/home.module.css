@@ -9,13 +9,14 @@
 
 /* Menu Lateral */
 .sidebar {
-  width: 250px;
-  background-color: #041f69;
+  width: 60px;
+  background: linear-gradient(135deg, #064fb4, #0f3274);
   color: white;
-  padding: 20px;
+  padding: 20px 0; /* Removendo padding horizontal */
   transition: transform 0.3s ease, width 0.3s ease;
   display: flex;
   flex-direction: column;
+  align-items: center; /* Centraliza todos os itens no eixo horizontal */
   justify-content: space-between;
   position: fixed;
   top: 0;
@@ -25,29 +26,34 @@
 }
 
 .sidebar.open {
-  transform: translateX(0);
+  width: 250px; /* Largura expandida */
 }
 
 .sidebar.closed {
-  transform: translateX(-100%);
+  width: 60px; /* Largura contraída */
 }
 
-.profile {
-  text-align: center;
-}
-
-.profilePic {
-  border-radius: 50%;
-  margin-bottom: 10px;
+/* Navegação */
+.nav {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centraliza os ícones */
+  width: 100%; /* Garante que os links ocupem toda a largura */
 }
 
 .nav ul {
   list-style-type: none;
   padding: 0;
+  margin-top: 50px;
+  width: 100%; /* Garante que os links ocupem toda a largura */
 }
 
 .nav ul li {
-  margin: 15px 0;
+  margin: 20px 0; /* Aumenta o espaçamento entre os itens para dar mais "respiro" */
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centraliza cada item */
 }
 
 .nav ul li a {
@@ -55,25 +61,48 @@
   text-decoration: none;
   font-size: 1.1rem;
   transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Espaço entre o ícone e o texto */
+  width: 100%; /* Garante que os links ocupem toda a largura */
+  justify-content: flex-start; /* Alinha os itens à esquerda */
+  padding-left: 20px; /* Espaçamento da esquerda para dar "respiro" */
 }
 
 .nav ul li a:hover {
   color: #39c2e4;
 }
 
+/* Ícones */
+.icon {
+  font-size: 1.5rem;
+  display: block; /* Garante que os ícones se alinhem consistentemente */
+  min-width: 30px; /* Garante que todos os ícones tenham o mesmo espaço reservado */
+  text-align: center; /* Centraliza o ícone dentro do espaço reservado */
+}
+
 .logoutContainer {
-  text-align: center;
   margin-top: auto;
+  width: 100%; /* Garante que o botão de logout ocupe toda a largura */
+  text-align: center; /* Centraliza o botão de logout */
+  display: flex;
+  justify-content: center;
 }
 
 .logoutButton {
   background-color: #39c2e4;
   color: white;
-  padding: 10px 20px;
+  padding: 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 80%; /* Reduz um pouco a largura do botão para dar uma borda interna */
+  max-width: 200px; /* Limita o tamanho máximo para evitar distorções */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .logoutButton:hover {
@@ -83,9 +112,9 @@
 /* Botão de Alternar Menu */
 .menuToggle {
   position: fixed;
-  top: 15px;
-  left: 15px;
-  background: #041f69;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(135deg, #064fb4, #0f3274);
   color: white;
   border: none;
   font-size: 1.5rem;
@@ -93,6 +122,10 @@
   padding: 10px;
   z-index: 1500; /* Garantir que fique acima do sidebar */
   border-radius: 4px;
+}
+
+.sidebar.closed ~ .menuToggle {
+  left: 20px;
 }
 
 /* Painel Principal */
@@ -103,15 +136,15 @@
   transition: margin-left 0.3s ease;
 }
 
+.sidebar.closed ~ .main {
+  margin-left: 60px;
+}
+
 .main .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-}
-
-.sidebar.closed ~ .main {
-  margin-left: 0;
 }
 
 .content {

@@ -3,8 +3,11 @@
 import { useSession, signOut } from "next-auth/react";
 import styles from '../home/home.module.css';
 import { useState, ReactNode } from "react";
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faCogs, faClipboardList, faUsers, faSignOut } from "@fortawesome/free-solid-svg-icons";
+
 
 interface LayoutProps {
   children: ReactNode;
@@ -33,27 +36,31 @@ export default function Layout({ children }: LayoutProps) {
 
       {/* Menu Lateral */}
       <aside className={`${styles.sidebar} ${menuOpen ? styles.open : styles.closed}`}>
-        <div className={styles.profile}>
-          <Image
-            src="/profile.jpg"
-            alt="Profile Picture"
-            width={100}
-            height={100}
-            className={styles.profilePic}
-          />
-          <h3>{session.user?.name}</h3>
-        </div>
         <nav className={styles.nav}>
           <ul>
-            <li><a onClick={() => router.push('/home')}>Home</a></li>
-            <li><a onClick={() => router.push('/create-user')}>Criação de usuário</a></li>
-            <li><a onClick={() => router.push('/applications')}>Aplicações</a></li>
-            <li><a onClick={() => router.push('/logs')}>Logs de usuários</a></li>
-            <li><a onClick={() => router.push('/users')}>Gerenciamento de usuário</a></li>
+            <li><a onClick={() => router.push('/home')}>
+            <FontAwesomeIcon icon={faHome} className={styles.icon} />
+            {menuOpen && <span>Home</span>}
+            </a></li>
+
+            <li><a onClick={() => router.push('/applications')}>
+            <FontAwesomeIcon icon={faCogs} className={styles.icon} />
+            {menuOpen && <span>Aplicações</span>}
+            </a></li>
+            <li><a onClick={() => router.push('/logs')}>
+            <FontAwesomeIcon icon={faClipboardList} className={styles.icon} />
+            {menuOpen && <span>Logs</span>}
+            </a></li>
+            <li><a onClick={() => router.push('/users')}>
+            <FontAwesomeIcon icon={faUsers} className={styles.icon} />
+            {menuOpen && <span>Usuários</span>}
+            </a></li>
           </ul>
         </nav>
         <div className={styles.logoutContainer}>
-          <button onClick={() => signOut()} className={styles.logoutButton}>Sair</button>
+          <button onClick={() => signOut()} className={styles.logoutButton}>
+            <FontAwesomeIcon icon={faSignOut} className={styles.icon} />
+          </button>
         </div>
       </aside>
 
